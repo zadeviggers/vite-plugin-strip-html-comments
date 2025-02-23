@@ -24,7 +24,7 @@ pnpm dlx jsr add @zade/vite-plugin-strip-html-comments
 import { stripHTMLComments } from "@zade/vite-plugin-strip-html-comments";
 
 // Anywhere
-const cleanHTML: string = stripHTMLComments(HTMLWithComments);
+const cleanHTML: string = stripHTMLComments(commentedHTML);
 
 // vite.config.js
 export default defineConfig({

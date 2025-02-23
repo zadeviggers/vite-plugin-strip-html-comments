@@ -1,5 +1,6 @@
 import { stripHTMLComments as stripHTMLCommentsCore } from "./core.ts";
 import type { Plugin as VitePlugin } from "vite";
+
 /**
  * Vite + Astro plugin to strip HTML comments from the entrypoint HTML files.
  * Also can be used as a string utility.
@@ -7,7 +8,7 @@ import type { Plugin as VitePlugin } from "vite";
  * @example
  * ```ts
  * // Anywhere
- * const cleanHTML: string = stripHTMLComments(HTMLWithComments);
+ * const cleanHTML: string = stripHTMLComments(commentedHTML);
  *
  * // vite.config.js
  * export default defineConfig({
@@ -33,12 +34,14 @@ export function stripHTMLComments(input?: string): VitePlugin | string {
 
 		// transformIndexHtml doesn't run in Astro - we need to inject a middleware
 		// @ts-expect-error blah
-		"astro:config:setup": ({ addMiddleware }) => {
-			addMiddleware({
-				entrypoint:
-					"@zade/vite-plugin-strip-html-comments/__internal-astro-middleware",
-				order: "post",
-			});
+		hooks: {
+			"astro:config:setup": ({ addMiddleware }) => {
+				addMiddleware({
+					entrypoint:
+						"@zade/vite-plugin-strip-html-comments/__internal-astro-middleware",
+					order: "post",
+				});
+			},
 		},
 	};
 }
