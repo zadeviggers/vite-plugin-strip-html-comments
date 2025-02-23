@@ -3,6 +3,22 @@ import { stripHTMLComments as stripHTMLCommentsCore } from "./core.ts";
 /**
  * Vite plugin to strip HTML comments from the entrypoint HTML files.
  * @type {import('vite').Plugin}
+ *
+ * @example
+ * ```ts
+ * // Anywhere
+ * const cleanHTML: string = stripHTMLComments(HTMLWithComments);
+ *
+ * // vite.config.js
+ * export default defineConfig({
+ * 	plugins: [stripHTMLComments()],
+ * });
+ *
+ * // astro.config.js
+ * export default defineConfig({
+ * 	integrations: [stripHTMLComments()],
+ * });
+ * ```
  */
 export function stripHTMLComments(input: string): string;
 export function stripHTMLComments(): {
